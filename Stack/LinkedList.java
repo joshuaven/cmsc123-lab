@@ -1,3 +1,5 @@
+package Stack;
+
 import java.util.NoSuchElementException;
 
 class LinkedList<E> implements Collection<E> {
@@ -16,40 +18,69 @@ class LinkedList<E> implements Collection<E> {
   Node temp = null;
   int size = 0;
   
-  // -> true
-  // Returns true if an item has successfully added to the Linked List at a given index
-  boolean add(E item, int index) {
-    
-    if (index == 1) {
+  void push(E item) {
       Node newNode = new Node(item, head);
       head = newNode;
-      size++;
-      return true;
+      items.size++;
     }
-    
-    Node newNode = new Node(item, head);
-    Node previous = head;
-    Node current = head.next;
-    
-    int previousIndex = 1;
-    
-    if (index > size + 1) {
-      return false;
-    }
-    
-    while (previous != null) {
-      if (previousIndex == (index - 1)) {
-        previous.next = newNode;
-        newNode.next = current;
-        size++;
+  
+  boolean isEmpty() {
+      if (items.size() <= 0) {
         return true;
-      } 
-      previousIndex++;
-      previous = current;
-      current = current.next;
+      } else {
+        return false;
+      }
     }
-    return false;
-  }
+    
+    Node pop() {
+      if (this.isEmpty() == true) {
+        throw new Error();
+      }
+      
+      Node item = head;
+      Node next = head.next;
+      
+      head = next;
+      items.size--;
+      return item;
+      
+    }
+  }+
+  
+//  // -> true
+//  // Returns true if an item has successfully added to the Linked List at a given index
+//  boolean add(E item, int index) {
+//    
+//    if (index == 1) {
+//      Node newNode = new Node(item, head);
+//      head = newNode;
+//      size++;
+//      return true;
+//    }
+//    
+//    Node newNode = new Node(item, head);
+//    Node previous = head;
+//    Node current = head.next;
+//    
+//    int previousIndex = 1;
+//    
+//    if (index > size + 1) {
+//      return false;
+//    }
+//    
+//    while (previous != null) {
+//      if (previousIndex == (index - 1)) {
+//        previous.next = newNode;
+//        newNode.next = current;
+//        size++;
+//        return true;
+//      } 
+//      previousIndex++;
+//      previous = current;
+//      current = current.next;
+//    }
+//    return false;
+//  }
   
   // -> boolean
   // Returns true if the item at the given index has been successfully removed
@@ -102,6 +133,7 @@ class LinkedList<E> implements Collection<E> {
     }
   }
 
+  
   public Iterator<E> iterator() {
     return new LinkedListIterator();
   }
@@ -123,7 +155,19 @@ class LinkedList<E> implements Collection<E> {
       current = current.next;
       return item;
     }  
-  } 
+  }
+  
+  class Stack {
+    LinkedList<E> items;
+    
+    Stack(LinkedList<E> items) {
+      this.items = items;
+    }
+    
+   
+    
+    
+  
 }
 
 
